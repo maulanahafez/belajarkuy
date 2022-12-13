@@ -5,29 +5,45 @@ session_start();
 $err = 0;
 if (isset($_POST['signup'])) {
   $name = $_POST['name'];
+  $email_user = $_POST['email_user'];
+  $no_telp_user = $_POST['no_telp_user'];
   $username = $_POST['username'];
   $password = $_POST['password'];
-  $sql1 = "select * from user";
-  $q1 = mysqli_query($conn, $sql1);
-  while ($row = mysqli_fetch_array($q1)) {
-    if ($row['username'] == $username) {
-      $err = 1;
+  $confirm_password = $_POST['confirm_password'];
+  $tipe_user = "murid";
+  if($password != $confirm_password){
+    ?>
+    <script>
+      alert("Pastikan PASSWORD dan CONFIRM PASSWORD sama");
+      document.location("./signup.php");
+    </script>
+    <?php
+  }else{
+    $sql1 = "select * from user";
+    $q1 = mysqli_query($conn, $sql1);
+    while ($row = mysqli_fetch_array($q1)) {
+      if ($row['username'] == $username) {
+        $err = 1;
+      }
     }
-  }
-  if ($err != 1) {
-    $sql2 = "insert into user(username, password, nama_user) values ('$username','$password','$name')";
-    $q2 = mysqli_query($conn, $sql2);
-    if ($q2) {
-      $_SESSION['username'] = $username;
-      $_SESSION['password'] = $password;
-      $_SESSION['name'] = $name;
-      header("location:../");
+    if ($err != 1) {
+      $sql2 = "insert into user(username, password, nama_user, email_user, no_telp_user, tipe_user) values ('$username','$password','$name','$email_user','$no_telp_user','$tipe_user')";
+      $q2 = mysqli_query($conn, $sql2);
+      if ($q2) {
+        $_SESSION['username'] = $username;
+        $_SESSION['password'] = $password;
+        $_SESSION['name'] = $name;
+        $_SESSION['email_user'] = $email_user;
+        $_SESSION['no_telp_user'] = $no_telp_user;
+        $_SESSION['tipe_user'] = $tipe_user;
+        header("location:../");
+      }
     }
   }
 }
 ?>
 <section class="">
-  <div class="container-fluid h-custom">
+  <div class="container-fluid h-custom mb-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-9 col-lg-6 col-xl-5">
         <img src="../img/signin-img.png" class="img-fluid" alt="Sign In Image" />
@@ -35,7 +51,7 @@ if (isset($_POST['signup'])) {
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
         <form action="" method="POST" name="signup-form">
           <div class="mb-3">
-            <h3 class="text-center mx-3 mb-0">Create a New Account</h3>
+            <h2 class="text-center mx-3 mb-0">Create a New Account</h2>
           </div>
 
           <?php
@@ -48,19 +64,34 @@ if (isset($_POST['signup'])) {
           }
           ?>
 
-          <div class="form-outline mb-4">
+          <div class="form-outline mb-3">
             <label class="form-label mb-0" for="form3Example3">Name</label>
-            <input type="text" id="form3Example3" class="form-control form-control-lg" placeholder="Enter your name" name="name" required />
+            <input type="text" id="form3Example3" class="form-control" placeholder="Enter your name" name="name" required />
           </div>
 
-          <div class="form-outline mb-4">
+          <div class="form-outline mb-3">
+            <label class="form-label mb-0" for="form3Example4">Email</label>
+            <input type="email" id="form3Example4" class="form-control" placeholder="Enter your email" name="email_user" required />
+          </div>
+
+          <div class="form-outline mb-3">
+            <label class="form-label mb-0" for="form3Example4">Phone Number</label>
+            <input type="text" id="form3Example4" class="form-control" placeholder="Enter your phone number" name="no_telp_user" required />
+          </div>
+
+          <div class="form-outline mb-3">
             <label class="form-label mb-0" for="form3Example3">Username</label>
-            <input type="text" id="form3Example3" class="form-control form-control-lg" placeholder="Enter a valid username" name="username" required />
+            <input type="text" id="form3Example3" class="form-control" placeholder="Enter a valid username" name="username" required />
           </div>
 
           <div class="form-outline mb-3">
             <label class="form-label mb-0" for="form3Example4">Password</label>
-            <input type="password" id="form3Example4" class="form-control form-control-lg" placeholder="Enter password" name="password" required />
+            <input type="password" id="form3Example4" class="form-control" placeholder="Enter password" name="password" required />
+          </div>
+
+          <div class="form-outline mb-3">
+            <label class="form-label mb-0" for="form3Example4">Confirm Password</label>
+            <input type="password" id="form3Example4" class="form-control" placeholder="Reenter password" name="confirm_password" required />
           </div>
 
           <div class="text-center text-lg-start mt-4 pt-2">

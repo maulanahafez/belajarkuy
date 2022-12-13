@@ -21,10 +21,10 @@ if (!isset($_SESSION)) {
         } else {
         ?>
           <h1 class="font-weight-bold display-4 mb-4">
-            Kami Menyediakan Bank Materi dan Bank Soal.
+            Let's Study with BelajarKuy!
           </h1>
           <p class="lead mb-3">
-            Our focus - memudahkan siswa dalam mengakses materi maupun soal dimanapun dan kapanpun.
+            Menjadikan BelajarKuy sebagai penyelamat belajarmu. Bikin belajar jadi lebih paham dan lebih mudah
           </p>
         <?php
         }
@@ -32,8 +32,6 @@ if (!isset($_SESSION)) {
         <?php
         if ($_SESSION) {
         ?>
-          <!-- <p><?php //$_SESSION['username'] ?></p> -->
-          <!-- <p><?php //$_SESSION['password'] ?></p> -->
         <?php
         } else {
         ?>

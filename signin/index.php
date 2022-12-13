@@ -11,10 +11,12 @@ if (isset($_POST['signin'])) {
   while ($row = mysqli_fetch_array($q1)) {
     if ($username == $row['username'] && $password == $row['password']) {
       if ($username == "admin") {
-        // header("location:../dashboard");
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
         $_SESSION['name'] = $row['nama_user'];
+        $_SESSION['email_user'] = $row['email_user']; 
+        $_SESSION['no_telp_user'] = $row['no_telp_user'];
+        $_SESSION['tipe_user'] = $row['tipe_user'];
         ?>
         <script>
           alert("Selamat Datang Kembali admin");
@@ -25,6 +27,9 @@ if (isset($_POST['signin'])) {
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
         $_SESSION['name'] = $row['nama_user'];
+        $_SESSION['email_user'] = $row['email_user']; 
+        $_SESSION['no_telp_user'] = $row['no_telp_user']; 
+        $_SESSION['tipe_user'] = $row['tipe_user'];
         header("location:/belajarkuy");
       }
     } else {

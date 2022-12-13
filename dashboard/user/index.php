@@ -1,7 +1,21 @@
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
 <?php
-include("../../config/connect.php");
 include("../inc/header.php");
+include("../../config/connect.php");
+if(!$_SESSION){
+  ?>
+  <script>
+    document.location = "/belajarkuy/signin/";
+  </script>
+  <?php
+}
+if ($_SESSION['tipe_user'] == "murid" || $_SESSION['tipe_user'] == "tentor") {
+  ?>
+  <script>
+    document.location = "/belajarkuy/dashboard/";
+  </script>
+  <?php
+}
 $sql = "select * from user order by username";
 $query = mysqli_query($conn, $sql);
 $i = 1;

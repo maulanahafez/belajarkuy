@@ -1,6 +1,20 @@
 <?php
-include("../../config/connect.php");
 include("../inc/header.php");
+include("../../config/connect.php");
+if(!$_SESSION){
+  ?>
+  <script>
+    document.location = "/belajarkuy/signin/";
+  </script>
+  <?php
+}
+if ($_SESSION['tipe_user'] == "murid") {
+  ?>
+  <script>
+    document.location = "/belajarkuy/dashboard/";
+  </script>
+  <?php
+}
 $sql = "select mapel.nama_mapel, materi.* from mapel join materi on mapel.id_mapel=materi.id_mapel;";
 $query = mysqli_query($conn, $sql);
 $i = 1;
