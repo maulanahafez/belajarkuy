@@ -8,11 +8,23 @@ if (!$_SESSION) {
 ?>
 <div class="position-relative" style="z-index:1;">
   <div class="container">
-    <div class="row justify-content-between text-center">
-      <div class="col-12 text-start mt-3 mb-3">
-        <h3 class="font-weight-bold">BANK SOAL</h3>
-        <h4 class="font-weight-bold">Pilih Mata Pelajaran</h4>
-      </div>
+    <div class="text-center mt-3 mb-3">
+      <h3 class="font-weight-bold">BANK SOAL</h3>
+      <h4 class="font-weight-bold">Pilih Mata Pelajaran</h4>
+    </div>
+    <div style="width: 30%;" class="text-center m-auto">
+      <form action="./" method="get" name="search">
+        <div class="input-group mb-3">
+          <input type="search" name="s" class="form-control" placeholder="Search">
+          <div class="input-group-append">
+            <button class="input-group-text">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row justify-content-between text-center mt-5">
       <div class="col-md-4 col-lg-3 pb-4">
         <a href="./?id=matematika" class="text-decoration-none">
           <div class="p-4 bg-tutor rounded">
@@ -46,6 +58,8 @@ if (!$_SESSION) {
         </a>
       </div>
     </div>
+
+    <!-- MAPEL -->
     <?php
     if (isset($_GET['id'])) {
       $id = $_GET['id'];
@@ -56,19 +70,25 @@ if (!$_SESSION) {
         <div class="mt-4">
           <div class="text-center">
             <div class="text-primary">
-              <h4>Materi <?= ucfirst($id) ?></h4>
+              <h4>Soal <?= ucfirst($id) ?></h4>
             </div>
           </div>
           <div class="row justify-content-center">
             <?php
             while ($row = mysqli_fetch_array($query)) {
             ?>
-              <div class="card col-4 mx-3 my-4 shadow text-center">
+              <div class="card col-4 mx-3 my-4 shadow">
                 <div class="card-body">
-                  <h5 class="card-title" style="height: 50px;"><?= $row['nama_soal'] ?></h5>
-                  <div>
-                    <a href="../asset/banksoal/<?= $row['file_soal'] ?>" target="_blank" class="btn btn-sm btn-success mb-3">View Online</a>
-                    <a href="../asset/banksoal/<?= $row['file_soal'] ?>" download="" class="btn btn-sm btn-warning">Download</a>
+                  <div class="text-start mb-3">
+                    <span class="bg-info p-1 text-white rounded"><?= $row['nama_mapel'] ?></span>
+                    <span class="bg-warning p-1 text-white rounded">Kelas <?= $row['kelas'] ?></span>
+                  </div>
+                  <div class="text-center">
+                    <h5 class="card-title" style="height: 50px;"><?= $row['nama_soal'] ?></h5>
+                    <div>
+                      <a href="../asset/banksoal/<?= $row['file_soal'] ?>" target="_blank" class="btn btn-sm btn-success mb-3">View Online</a>
+                      <a href="../asset/banksoal/<?= $row['file_soal'] ?>" download="" class="btn btn-sm btn-warning">Download</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -82,6 +102,47 @@ if (!$_SESSION) {
     }
     ?>
 
+    <!-- SEARCH -->
+    <?php
+    if (isset($_GET['s'])) {
+      $s = $_GET['s'];
+      $query = mysqli_query($conn, "select * from soal join mapel on soal.id_mapel=mapel.id_mapel where nama_soal like '%$s%'");
+      ?>
+      <div class="container m-auto">
+        <div class="mt-4">
+          <div class="text-center">
+            <div class="text-primary">
+              <h4>Hasil Pencarian '<?= strtoupper($s) ?>'</h4>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <?php
+            while ($row = mysqli_fetch_array($query)) {
+            ?>
+              <div class="card col-4 mx-3 my-4 shadow">
+                <div class="card-body">
+                  <div class="text-start mb-3">
+                    <span class="bg-info p-1 text-white rounded"><?= $row['nama_mapel'] ?></span>
+                    <span class="bg-warning p-1 text-white rounded">Kelas <?= $row['kelas'] ?></span>
+                  </div>
+                  <div class="text-center">
+                    <h5 class="card-title" style="height: 50px;"><?= $row['nama_soal'] ?></h5>
+                    <div>
+                      <a href="../asset/banksoal/<?= $row['file_soal'] ?>" target="_blank" class="btn btn-sm btn-success mb-3">View Online</a>
+                      <a href="../asset/banksoal/<?= $row['file_soal'] ?>" download="" class="btn btn-sm btn-warning">Download</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <?php
+            }
+            ?>
+          </div>
+        </div>
+      </div>
+    <?php
+    }
+    ?>
   </div>
 </div>
 <?php

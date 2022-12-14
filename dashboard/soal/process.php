@@ -3,34 +3,35 @@ include("../../config/connect.php");
 include("../inc/header.php");
 ?>
 <?php
-$id_soal = $id_mapel = $nama_soal = $file_soal = '';
+$id_soal = $id_mapel = $kelas = $nama_soal = $file_soal = '';
 $err = 0;
 
 // INSERT DATA
 if (isset($_POST['add'])) {
   $id_mapel = $_POST['id_mapel'];
+  $kelas = $_POST['kelas'];
   $nama_soal = $_POST['nama_soal'];
   $file_soal = $_FILES['file_soal']['name'];
   $path = "../../asset/banksoal/";
   $tmp = $_FILES['file_soal']['tmp_name'];
   move_uploaded_file($tmp, $path . $file_soal);
   if ($err != 1) {
-    $sql2 = "insert into soal(id_soal, id_mapel, nama_soal, file_soal) values ('','$id_mapel', '$nama_soal', '$file_soal')";
+    $sql2 = "insert into soal(id_soal, id_mapel, kelas, nama_soal, file_soal) values ('','$id_mapel', '$kelas', '$nama_soal', '$file_soal')";
     $q2 = mysqli_query($conn, $sql2);
     if ($q2) {
-?>
+      ?>
       <script>
         alert("Data berhasil ditambahkan");
         document.location = "./";
       </script>
-    <?php
+      <?php
     } else {
-    ?>
+      ?>
       <script>
         alert("Data gagal ditambahkan");
         document.location = "./";
       </script>
-    <?php
+      <?php
     }
   }
 }
@@ -69,13 +70,15 @@ if (isset($_GET['edit'])) {
   while ($row = mysqli_fetch_array($q1)) {
     $id_soal = $row['id_soal'];
     $id_mapel = $row['id_mapel'];
+    $kelas = $row['kelas'];
     $nama_soal = $row['nama_soal'];
     $file_soal = $row['file_soal'];
   }
   if (isset($_POST['edit'])) {
     $id_mapel = $_POST['id_mapel'];
     $nama_soal = $_POST['nama_soal'];
-    $sql2 = "update soal set id_mapel='$id_mapel', nama_soal='$nama_soal' where id_soal='$id'";
+    $kelas = $_POST['kelas'];
+    $sql2 = "update soal set id_mapel='$id_mapel', kelas='$kelas', nama_soal='$nama_soal' where id_soal='$id'";
     $q2 = mysqli_query($conn, $sql2);
     if ($q2) {
     ?>
@@ -121,6 +124,21 @@ if (isset($_GET['edit'])) {
           </select>
         </div>
         <div class="mb-3">
+          <label class="form-label">Kelas</label>
+          <select name="kelas" class="form-select form-select-sm" id="" required>
+            <option>Pilih kelas</option>
+            <option value="10" <?php if ($kelas == '10') {
+                                  echo "selected";
+                                } ?>>10</option>
+            <option value="11" <?php if ($kelas == '11') {
+                                  echo "selected";
+                                } ?>>11</option>
+            <option value="12" <?php if ($kelas == '12') {
+                                  echo "selected";
+                                } ?>>12</option>
+          </select>
+        </div>
+        <div class="mb-3">
           <label class="form-label">Nama Soal</label>
           <input type="text" name="nama_soal" class="form-control form-control-sm" value="<?= $nama_soal ?>" required>
         </div>
@@ -136,7 +154,7 @@ if (isset($_GET['edit'])) {
       </div>
     </form>
   </div>
-<?php
+  <?php
 }
 ?>
 <?php

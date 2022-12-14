@@ -3,12 +3,13 @@ include("../../config/connect.php");
 include("../inc/header.php");
 ?>
 <?php
-$id_materi = $id_mapel = $nama_materi = $desc_materi = $file_materi = '';
+$id_materi = $id_mapel = $kelas = $nama_materi = $desc_materi = $file_materi = '';
 $err = 0;
 
 // INSERT DATA
 if (isset($_POST['add'])) {
   $id_mapel = $_POST['id_mapel'];
+  $kelas = $_POST['kelas'];
   $nama_materi = $_POST['nama_materi'];
   $desc_materi = $_POST['desc_materi'];
   $file_materi = $_FILES['file_materi']['name'];
@@ -16,22 +17,22 @@ if (isset($_POST['add'])) {
   $tmp = $_FILES['file_materi']['tmp_name'];
   move_uploaded_file($tmp, $path . $file_materi);
   if ($err != 1) {
-    $sql2 = "insert into materi(id_materi, id_mapel, nama_materi, desc_materi, file_materi) values ('','$id_mapel', '$nama_materi', '$desc_materi', '$file_materi')";
+    $sql2 = "insert into materi(id_materi, id_mapel, kelas, nama_materi, desc_materi, file_materi) values ('','$id_mapel', '$kelas', '$nama_materi', '$desc_materi', '$file_materi')";
     $q2 = mysqli_query($conn, $sql2);
     if ($q2) {
-?>
+      ?>
       <script>
         alert("Data berhasil ditambahkan");
         document.location = "./";
       </script>
-    <?php
+      <?php
     } else {
-    ?>
+      ?>
       <script>
         alert("Data gagal ditambahkan");
         document.location = "./";
       </script>
-    <?php
+      <?php
     }
   }
 }
@@ -70,15 +71,17 @@ if (isset($_GET['edit'])) {
   while ($row = mysqli_fetch_array($q1)) {
     $id_materi = $row['id_materi'];
     $id_mapel = $row['id_mapel'];
+    $kelas = $row['kelas'];
     $nama_materi = $row['nama_materi'];
     $desc_materi = $row['desc_materi'];
     $file_materi = $row['file_materi'];
   }
   if (isset($_POST['edit'])) {
     $id_mapel = $_POST['id_mapel'];
+    $kelas = $_POST['kelas'];
     $nama_materi = $_POST['nama_materi'];
     $desc_materi = $_POST['desc_materi'];
-    $sql2 = "update materi set id_mapel='$id_mapel', nama_materi='$nama_materi', desc_materi='$desc_materi' where id_materi='$id'";
+    $sql2 = "update materi set id_mapel='$id_mapel', kelas='$kelas', nama_materi='$nama_materi', desc_materi='$desc_materi' where id_materi='$id'";
     $q2 = mysqli_query($conn, $sql2);
     if ($q2) {
     ?>
@@ -123,6 +126,21 @@ if (isset($_GET['edit'])) {
                               } ?>>Biologi</option>
           </select>
         </div>
+          <div class="mb-3">
+            <label class="form-label">Kelas</label>
+            <select name="kelas" class="form-select form-select-sm" id="" required>
+              <option>Pilih kelas</option>
+              <option value="10" <?php if ($kelas == '10') {
+                                  echo "selected";
+                                } ?>>10</option>
+              <option value="11" <?php if ($kelas == '11') {
+                                  echo "selected";
+                                } ?>>11</option>
+              <option value="12" <?php if ($kelas == '12') {
+                                  echo "selected";
+                                } ?>>12</option>
+            </select>
+          </div>
         <div class="mb-3">
           <label class="form-label">Nama Materi</label>
           <input type="text" name="nama_materi" class="form-control form-control-sm" value="<?= $nama_materi ?>" required>
@@ -143,7 +161,7 @@ if (isset($_GET['edit'])) {
       </div>
     </form>
   </div>
-<?php
+  <?php
 }
 ?>
 <?php

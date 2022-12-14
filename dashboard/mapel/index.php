@@ -78,6 +78,7 @@ $i = 1;
     ?>
   </table>
 </div>
+<button class="btn btn-sm btn-warning" onclick="window.print()">Print</button>
 <?php
 include("../inc/footer.php")
 ?>

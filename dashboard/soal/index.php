@@ -41,6 +41,15 @@ $i = 1;
             </select>
           </div>
           <div class="mb-3">
+            <label class="form-label">Kelas</label>
+            <select name="kelas" class="form-select form-select-sm" id="" required>
+              <option>Pilih kelas</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </div>
+          <div class="mb-3">
             <label class="form-label">Nama Soal</label>
             <input type="text" name="nama_soal" class="form-control" required>
           </div>
@@ -75,6 +84,7 @@ $i = 1;
       <th class="d-none">ID Soal</th>
       <th class="d-none">ID Mapel</th>
       <th>Nama Mapel</th>
+      <th>Kelas</th>
       <th>Nama Soal</th>
       <th>File Soal</th>
       <th colspan="2">Action</th>
@@ -87,9 +97,10 @@ $i = 1;
         <td class="d-none"><?= $row['id_soal'] ?></td>
         <td class="d-none"><?= $row['id_mapel'] ?></td>
         <td><?= $row['nama_mapel'] ?></td>
+        <td><?= $row['kelas'] ?></td>
         <td><?= $row['nama_soal'] ?></td>
         <td>
-          <a href="../../asset/banksoal/<?= $row['file_soal'] ?>" target="_blank" class="btn btn-sm btn-secondary">View Online</a>
+          <a href="../../asset/banksoal/<?= $row['file_soal'] ?>" target="_blank" class="btn btn-sm btn-secondary">View</a>
           <a href="../../asset/banksoal/<?= $row['file_soal'] ?>" download="" class="btn btn-sm btn-secondary">Download</a>
         </td>
         <td>
@@ -103,6 +114,7 @@ $i = 1;
     ?>
   </table>
 </div>
+<button class="btn btn-sm btn-warning" onclick="window.print()">Print</button>
 <?php
 include("../inc/footer.php")
 ?>

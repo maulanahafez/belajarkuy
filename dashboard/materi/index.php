@@ -41,6 +41,15 @@ $i = 1;
             </select>
           </div>
           <div class="mb-3">
+            <label class="form-label">Kelas</label>
+            <select name="kelas" class="form-select form-select-sm" id="" required>
+              <option>Pilih kelas</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </div>
+          <div class="mb-3">
             <label class="form-label">Nama Materi</label>
             <input type="text" name="nama_materi" class="form-control" required>
           </div>
@@ -79,6 +88,7 @@ $i = 1;
       <th class="d-none">ID Materi</th>
       <th class="d-none">ID Mapel</th>
       <th>Nama Mapel</th>
+      <th>Kelas</th>
       <th>Nama Materi</th>
       <th>Deskripsi Materi</th>
       <th>File Materi</th>
@@ -92,10 +102,11 @@ $i = 1;
         <td style="width: 15%;" class="d-none"><?= $row['id_materi'] ?></td>
         <td class="d-none"><?= $row['id_mapel'] ?></td>
         <td><?= $row['nama_mapel'] ?></td>
+        <td><?= $row['kelas'] ?></td>
         <td style="width: 10%;"><?= $row['nama_materi'] ?></td>
         <td style="width: 20%;"><?= $row['desc_materi'] ?></td>
         <td>
-          <a href="../../asset/bankmateri/<?= $row['file_materi'] ?>" target="_blank" class="btn btn-sm btn-secondary">View Online</a>
+          <a href="../../asset/bankmateri/<?= $row['file_materi'] ?>" target="_blank" class="btn btn-sm btn-secondary">View</a>
           <a href="../../asset/bankmateri/<?= $row['file_materi'] ?>" download="" class="btn btn-sm btn-secondary">Download</a>
         </td>
         <td>
@@ -109,6 +120,7 @@ $i = 1;
     ?>
   </table>
 </div>
+<button class="btn btn-sm btn-warning" onclick="window.print()">Print</button>
 <?php
 include("../inc/footer.php")
 ?>
