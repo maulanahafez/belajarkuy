@@ -30,6 +30,10 @@ $q6 =  mysqli_query($conn, "select count(id_soal) as count from soal");
 while ($row = mysqli_fetch_array($q6)) {
   $soal = $row['count'];
 }
+$q7 = mysqli_query($conn, "select count(id_jadwal) as count from jadwal");
+while ($row = mysqli_fetch_array($q7)) {
+  $jadwal = $row['count'];
+}
 ?>
 <div class="row justify-content-evenly align-items-center mt-5">
   <div class="d-none">
@@ -88,6 +92,19 @@ while ($row = mysqli_fetch_array($q6)) {
             <div class="col-6">
               <h4><?= $feedback ?></h4>
               <h5 class="fst-italic">FEEDBACK</h5>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="./jadwal/" class="btn btn-dark col-3 mx-5 mb-4 shadow-lg">
+        <div>
+          <div class="row justify-content-evenly align-items-center">
+            <div class="col-4">
+              <h1><i class="fa-solid fa-calendar-days"></i></h1>
+            </div>
+            <div class="col-6">
+              <h4><?= $jadwal ?></h4>
+              <h5 class="fst-italic">JADWAL</h5>
             </div>
           </div>
         </div>

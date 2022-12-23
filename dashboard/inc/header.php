@@ -19,6 +19,7 @@ session_start();
       }
     }
   </style>
+  <link rel="icon" href="/belajarkuy/asset/images/favicon.ico" type="image/x-icon type">
 </head>
 
 <body>
@@ -74,6 +75,11 @@ session_start();
               <li class="nav-item">
                 <a href="/belajarkuy/dashboard/soal/" class="nav-link align-middle px-0">
                   <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline text-light"><i class="fa-solid fa-clipboard me-3"></i>Soal</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/belajarkuy/dashboard/jadwal/" class="nav-link align-middle px-0">
+                  <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline text-light"><i class="fa-solid fa-calendar-days me-3"></i>Jadwal</span>
                 </a>
               </li>
               <li class="nav-item">

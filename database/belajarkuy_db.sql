@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2022 at 06:31 AM
+-- Generation Time: Dec 23, 2022 at 03:29 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -44,7 +44,8 @@ INSERT INTO `feedback` (`id_review`, `username`, `user_review`, `date`, `type_re
 (70, 'hafez', 'materinya kurang lengkap', '2022-11-29 14:25:28', 'Website', 3),
 (73, 'bisma', 'soal-soalnya lengkap', '2022-11-29 14:27:48', 'Website', 5),
 (74, 'bisma', 'tentor kimia kurang mudengin', '2022-11-29 14:28:47', 'Tentor', 2),
-(75, 'hafez', 'tentor biologi seru bgt', '2022-11-29 14:29:50', 'Tentor', 5);
+(75, 'hafez', 'tentor biologi seru bgt', '2022-11-29 14:29:50', 'Tentor', 5),
+(76, 'bisma', 'keren <3', '2022-12-14 06:36:48', 'Website', 5);
 
 -- --------------------------------------------------------
 
@@ -57,6 +58,13 @@ CREATE TABLE `jadwal` (
   `tahun_ajaran` varchar(255) NOT NULL,
   `file_jadwal` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jadwal`
+--
+
+INSERT INTO `jadwal` (`id_jadwal`, `tahun_ajaran`, `file_jadwal`) VALUES
+(4, '2022/2023', 'Jadwal BelajarKuy 20222023.pdf');
 
 -- --------------------------------------------------------
 
@@ -156,12 +164,13 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`username`, `password`, `nama_user`, `email_user`, `no_telp_user`, `tipe_user`) VALUES
 ('admin', 'admin', 'admin', 'admin@gmail.com', '081256788765', 'pengelola'),
-('ayu', '12345', 'Ayu Anjar P', 'ayuanjar@gmail.com', '085123412345', 'pengelola'),
+('ayu', '12345', 'Ayu Anjar P', 'ayuanjar@gmail.com', '085123412345', 'murid'),
 ('belajarkuy', '12345', 'Belajar Kuy', 'belajarkuy@gmail.com', '085602597909', 'pemilik'),
 ('bisma', '12345', 'Ahita Bisma Adlula', 'ahita@gmail.com', '085667667887', 'tentor'),
 ('hafez', '12345', 'Maulana Hafez AT', 'maulana@gmail.com', '085602597909', 'murid'),
 ('hisyam', '12345', 'Hisyam Bahrul Khamim', 'hisyam@gmail.com', '082839394040', 'murid'),
 ('pilar', '12345', 'Pilar FH', 'pilar@gmail.com', '028198765432', 'tentor'),
+('tara', '12345', 'Ahyatara Tempariyawan', 'ahyatara@gmail.com', '085643432121', 'tentor'),
 ('uus', '12345', 'Usriyatul Khamimah', 'uus@gmail.com', '0856667778885', 'tentor');
 
 --
@@ -215,13 +224,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id_review` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id_review` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `jadwal`
 --
 ALTER TABLE `jadwal`
-  MODIFY `id_jadwal` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jadwal` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `mapel`
